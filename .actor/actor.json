@@ -1,8 +1,8 @@
 {
   "actorSpecification": 1,
   "name": "rss-feed-reader",
-  "title": "RSS Feed Reader & Monitor: RSS, Atom, JSON Feed to JSON",
-  "description": "Read RSS, Atom and JSON feeds in bulk (or paste a website URL and the feed is found for you). Only-new-items mode for scheduled monitoring, keyword and date filters, optional full article text, merged RSS/Atom/JSON output feed. $0.50 per 1,000 items.",
+  "title": "RSS Feed Reader & News Monitor: RSS, Atom, JSON Feed",
+  "description": "Read and monitor RSS, Atom and JSON feeds in bulk (or paste a website URL and the feed is found for you): only-new-items mode for scheduled news and blog monitoring, keyword and date filters, optional full article text, merged output feed. $0.50 per 1,000 items.",
   "version": "1.0",
   "buildTag": "latest",
   "input": "./input_schema.json",
@@ -16,21 +16,56 @@
         "overview": {
           "title": "Feed items",
           "transformation": {
-            "fields": ["published", "feedTitle", "title", "link", "author", "summary", "categories", "fullText", "inputUrl", "error"]
+            "fields": [
+              "published",
+              "feedTitle",
+              "title",
+              "link",
+              "author",
+              "summary",
+              "categories",
+              "fullText",
+              "inputUrl",
+              "error"
+            ]
           },
           "display": {
             "component": "table",
             "properties": {
-              "published": {"label": "Published", "format": "date"},
-              "feedTitle": {"label": "Feed"},
-              "title": {"label": "Title"},
-              "link": {"label": "Link", "format": "link"},
-              "author": {"label": "Author"},
-              "summary": {"label": "Summary"},
-              "categories": {"label": "Categories", "format": "array"},
-              "fullText": {"label": "Full text"},
-              "inputUrl": {"label": "Input URL", "format": "link"},
-              "error": {"label": "Error"}
+              "published": {
+                "label": "Published",
+                "format": "date"
+              },
+              "feedTitle": {
+                "label": "Feed"
+              },
+              "title": {
+                "label": "Title"
+              },
+              "link": {
+                "label": "Link",
+                "format": "link"
+              },
+              "author": {
+                "label": "Author"
+              },
+              "summary": {
+                "label": "Summary"
+              },
+              "categories": {
+                "label": "Categories",
+                "format": "array"
+              },
+              "fullText": {
+                "label": "Full text"
+              },
+              "inputUrl": {
+                "label": "Input URL",
+                "format": "link"
+              },
+              "error": {
+                "label": "Error"
+              }
             }
           }
         }

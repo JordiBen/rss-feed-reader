@@ -1,0 +1,18 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "RSS feed reader output",
+  "properties": {
+    "results": {
+      "type": "string",
+      "template": "{{links.apiDefaultDatasetUrl}}/items",
+      "title": "Feed items",
+      "description": "One item per feed entry (after filters and only-new deduplication), with optional full article text."
+    },
+    "feed": {
+      "type": "string",
+      "title": "Merged output feed",
+      "description": "Merged RSS/Atom/JSON feed of the delivered items (only when an output feed format is selected).",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/OUTPUT_FEED"
+    }
+  }
+}

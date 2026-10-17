@@ -1,0 +1,108 @@
+{
+  "title": "RSS Feed Reader input",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "feedUrls": {
+      "title": "Feed or website URLs",
+      "type": "array",
+      "editor": "requestListSources",
+      "description": "RSS, Atom or JSON Feed URLs. You can also paste a normal website or blog URL: the Actor looks for the feed (link tags, then common paths such as /feed and /rss.xml).",
+      "prefill": [{"url": "https://hnrss.org/frontpage"}, {"url": "https://blog.python.org"}]
+    },
+    "maxItemsPerFeed": {
+      "title": "Max items per feed",
+      "type": "integer",
+      "default": 50,
+      "minimum": 0,
+      "maximum": 1000,
+      "description": "Newest items first. 0 = everything in the feed (up to 1,000)."
+    },
+    "onlyNewItems": {
+      "title": "Only new items since the last run",
+      "type": "boolean",
+      "default": false,
+      "description": "For scheduled monitoring. Remembers which items each feed contained at the last run (in a named key-value store) and outputs only items that appeared since. The first run returns the newest items (up to the per-feed max). Unchanged feeds are skipped with conditional requests (ETag / Last-Modified).",
+      "sectionCaption": "Monitoring & filters"
+    },
+    "stateKey": {
+      "title": "Monitor name",
+      "type": "string",
+      "editor": "textfield",
+      "default": "default",
+      "description": "Keeps separate 'already seen' lists for different schedules or tasks that read the same feeds."
+    },
+    "publishedAfter": {
+      "title": "Published after",
+      "type": "string",
+      "editor": "textfield",
+      "description": "Only items published after this date. Absolute (2026-10-01) or relative (24 hours, 7 days, 2 weeks). Items without a date are skipped when this is set."
+    },
+    "includeKeywords": {
+      "title": "Include keywords",
+      "type": "array",
+      "editor": "stringList",
+      "description": "Keep only items whose title, summary, content, author or categories contain at least one of these (case-insensitive)."
+    },
+    "excludeKeywords": {
+      "title": "Exclude keywords",
+      "type": "array",
+      "editor": "stringList",
+      "description": "Drop items containing any of these (case-insensitive)."
+    },
+    "fetchFullText": {
+      "title": "Fetch full article text",
+      "type": "boolean",
+      "default": false,
+      "description": "Open each item's link and extract the main article text as Markdown (robots.txt respected, no logins or paywalls). Charged separately, only when text is found.",
+      "sectionCaption": "Content"
+    },
+    "includeContentHtml": {
+      "title": "Include content HTML from the feed",
+      "type": "boolean",
+      "default": false,
+      "description": "Add the feed's own full content (content:encoded / Atom content) as HTML. Makes items larger."
+    },
+    "outputFeedFormat": {
+      "title": "Merged output feed",
+      "type": "string",
+      "editor": "select",
+      "enum": ["none", "rss", "atom", "json"],
+      "enumTitles": ["None", "RSS 2.0", "Atom 1.0", "JSON Feed 1.1"],
+      "default": "none",
+      "description": "Also save all returned items as one merged, filtered feed in the key-value store (record OUTPUT_FEED). Plug it into any feed reader, Slack or Zapier.",
+      "sectionCaption": "Output feed"
+    },
+    "outputFeedTitle": {
+      "title": "Merged feed title",
+      "type": "string",
+      "editor": "textfield",
+      "default": "Merged feed",
+      "description": "Title of the merged output feed."
+    },
+    "discoverFeeds": {
+      "title": "Discover feeds on web pages",
+      "type": "boolean",
+      "default": true,
+      "description": "If a URL is a normal web page, look for its RSS/Atom/JSON feed.",
+      "sectionCaption": "Advanced"
+    },
+    "maxConcurrency": {
+      "title": "Max concurrency",
+      "type": "integer",
+      "default": 5,
+      "minimum": 1,
+      "maximum": 20,
+      "description": "How many feeds are fetched in parallel."
+    },
+    "timeoutSecs": {
+      "title": "Timeout per request (seconds)",
+      "type": "integer",
+      "default": 30,
+      "minimum": 5,
+      "maximum": 120,
+      "description": "How long to wait for each feed or page."
+    }
+  },
+  "required": ["feedUrls"]
+}
